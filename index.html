@@ -75,7 +75,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <script>
     // Replace with your Sheet's published CSV URL
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/103sSKQgWiwVYuro-pj3l0P-CYCi1qGdQMfUYS-J5MvU/pub?gid=0&output=csv';
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/103sSKQgWiwVYuro-pj3l0P-CYCi1qGdQMfUYS-J5MvU/export?format=csv';
     fetch(sheetUrl, { method: 'GET' })
       .then(response => {
         if (!response.ok) {
