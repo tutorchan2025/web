@@ -42,6 +42,10 @@
       background-color: #4CAF50;
       color: white;
     }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
     @media only screen and (max-width: 768px) {
       html, body, .fullscreen-container, #sheet-data, table {
         height: 100vh !important;
@@ -51,6 +55,10 @@
         top: 0 !important;
         left: 0 !important;
         overflow: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
       }
       table {
         font-size: 14px;
@@ -65,11 +73,15 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <script>
-    // Replace with your Sheet's published CSV URL
+    // Your Sheet's published CSV URL
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/103sSKQgWiwVYuro-pj3l0P-CYCi1qGdQMfUYS-J5MvU/pub?output=csv';
-
     fetch(sheetUrl)
-      .then(response => response.text())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
       .then(data => {
         Papa.parse(data, {
           complete: result => {
@@ -84,12 +96,14 @@
             html += '</table>';
             output.innerHTML = html;
           },
-          header: false
+          header: false,
+          skipEmptyLines: true
         });
       })
       .catch(error => {
-        document.getElementById('sheet-data').innerHTML = 'Error loading data: ' + error;
+        const output = document.getElementById('sheet-data');
+        output.innerHTML = `<p class="error">Error loading data: ${error.message}</p>`;
       });
   </script>
-</body>
-</html>
+  </body>
+  </html>
