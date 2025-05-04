@@ -59,6 +59,7 @@
         padding: 0 !important;
         width: 100vw !important;
         box-sizing: border-box !important;
+        z-index: 9999 !important;
       }
       table {
         font-size: 14px;
@@ -73,18 +74,21 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <script>
-    // Your Sheet's published CSV URL
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/103sSKQgWiwVYuro-pj3l0P-CYCi1qGdQMfUYS-J5MvU/pub?output=csv';
-    fetch(sheetUrl)
+    // Replace with your Sheet's published CSV URL
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/103sSKQgWiwVYuro-pj3l0P-CYCi1qGdQMfUYS-J5MvU/pub?gid=0&output=csv';
+    fetch(sheetUrl, { method: 'GET' })
       .then(response => {
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          throw new Error(`HTTP error! Status: ${response.status} (${response.statusText})`);
         }
         return response.text();
       })
       .then(data => {
         Papa.parse(data, {
           complete: result => {
+            if (!result.data || result.data.length === 0) {
+              throw new Error('No data found in CSV');
+            }
             const headers = result.data[0];
             const content = result.data.slice(1);
             const output = document.getElementById('sheet-data');
@@ -103,6 +107,7 @@
       .catch(error => {
         const output = document.getElementById('sheet-data');
         output.innerHTML = `<p class="error">Error loading data: ${error.message}</p>`;
+        console.error('Fetch error:', error);
       });
   </script>
   </body>
