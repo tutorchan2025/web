@@ -3,192 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bright Future NGO | Children's Education in Hong Kong</title>
+    <meta name="description" content="Bright Future NGO provides educational programs for underprivileged children in Hong Kong.">
+    <meta name="keywords" content="NGO, education, children, Hong Kong, charity, donate">
+    <meta property="og:title" content="Bright Future NGO | Children's Education in Hong Kong">
+    <meta property="og:description" content="Empowering underprivileged children through quality education in Hong Kong since 2010.">
+    <meta property="og:image" content="/images/hero.jpg">
+    <meta property="og:url" content="https://brightfuturehk.org">
+    <title>Bright Future NGO</title>
     <style>
-        /* CSS Reset and Base Styles */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --light-color: #f4f4f4;
+            --text-color: #333;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', 'Microsoft JhengHei', sans-serif;
-        }
-
-        :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #ff914d;
-            --light-color: #f8f9fa;
-            --dark-color: #333;
-            --success-color: #28a745;
         }
 
         body {
+            font-family: Arial, sans-serif;
             line-height: 1.6;
-            color: var(--dark-color);
-            background-color: #fff;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--primary-color);
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
+            color: var(--text-color);
         }
 
         .container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .btn:hover {
-            background-color: #3a5a80;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: var(--secondary-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: #e07d3e;
-        }
-
-        /* Language Switcher */
-        .language-switcher {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .language-btn {
-            background: none;
-            border: none;
-            color: var(--dark-color);
-            cursor: pointer;
-            font-size: 14px;
-            padding: 5px 10px;
-            border-radius: 3px;
-            transition: all 0.3s;
-        }
-
-        .language-btn.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        /* Header Styles */
         header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
+            background: #fff;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            transition: background 0.3s;
         }
 
-        .header-container {
+        header.sticky {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            position: relative;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-color);
         }
 
-        .logo span {
-            color: var(--secondary-color);
-        }
-
-        nav ul {
+        .nav-links {
             display: flex;
             list-style: none;
         }
 
-        nav ul li {
-            margin-left: 20px;
+        .nav-links li {
+            margin-left: 2rem;
         }
 
-        nav ul li a {
-            color: var(--dark-color);
-            font-weight: 500;
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
             transition: color 0.3s;
         }
 
-        nav ul li a:hover {
-            color: var(--primary-color);
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid var(--primary-color);
+            padding: 0.3rem 0.6rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .language-btn.active {
+            background: var(--secondary-color);
+            color: #fff;
         }
 
         .mobile-menu-btn {
             display: none;
+            font-size: 1.5rem;
             background: none;
             border: none;
-            font-size: 24px;
             cursor: pointer;
-            color: var(--dark-color);
         }
 
-        /* Hero Section */
-        .hero {
-            background-color: var(--light-color);
-            padding: 80px 0;
+        /* Banner Section Styles */
+        .banner-section {
+            width: 100%;
+            overflow: hidden;
+            padding: 0;
+            margin-top: 70px; /* Offset for fixed header */
+        }
+
+        .banner-container {
+            display: flex;
+            overflow-x: hidden; /* Hide scrollbar for seamless loop */
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        .banner {
+            flex: 0 0 100%;
+            height: 400px;
+            position: relative;
+            scroll-snap-align: start;
+            display: block; /* Ensure banners are visible */
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 1rem;
+            border-radius: 5px;
+            font-size: 1.5rem;
             text-align: center;
         }
 
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--primary-color);
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
         .hero p {
             font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
+            margin-bottom: 2rem;
         }
 
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
+        .hero-buttons .btn {
+            margin: 0 0.5rem;
         }
 
-        /* About Section */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: darken(var(--secondary-color), 10%);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+            color: var(--primary-color);
+        }
+
         .section {
-            padding: 60px 0;
+            padding: 5rem 0;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 40px;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
             color: var(--primary-color);
+        }
+
+        .bg-light {
+            background: var(--light-color);
         }
 
         .about-content {
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 2rem;
         }
 
         .about-text {
@@ -197,283 +234,263 @@
 
         .about-image {
             flex: 1;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* Programs Section */
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
         .programs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 2rem;
         }
 
         .program-card {
-            background-color: white;
+            background: #fff;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
 
         .program-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
         }
 
         .program-image {
             height: 200px;
-            background-color: #ddd;
-            background-size: cover;
-            background-position: center;
+            overflow: hidden;
+        }
+
+        .program-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .program-info {
-            padding: 20px;
+            padding: 1.5rem;
         }
 
         .program-info h3 {
-            margin-bottom: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--primary-color);
         }
 
-        /* Impact Section */
         .impact-stats {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
         }
 
         .stat-item {
-            text-align: center;
-            padding: 20px;
-            background-color: var(--light-color);
-            border-radius: 10px;
-            flex: 1;
-            min-width: 150px;
+            padding: 1rem;
         }
 
         .stat-number {
             font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 5px;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
         }
 
-        /* Contact Section */
         .contact-container {
             display: flex;
-            gap: 40px;
+            gap: 2rem;
         }
 
-        .contact-info {
-            flex: 1;
-        }
-
-        .contact-info h3 {
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-
-        .contact-info p {
-            margin-bottom: 15px;
-        }
-
+        .contact-info,
         .contact-form {
             flex: 1;
         }
 
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+        }
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 10px;
+            padding: 0.8rem;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 16px;
         }
 
         .form-group textarea {
-            height: 120px;
+            height: 150px;
         }
 
-        /* Footer */
+        .whatsapp-btn {
+            background: #25D366;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .whatsapp-btn svg {
+            margin-right: 8px;
+            fill: white;
+        }
+
+        .donate-section {
+            text-align: center;
+        }
+
+        .donate-section p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
         footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 40px 0 20px;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 3rem 0;
         }
 
-        .footer-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            justify-content: space-between;
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
-        .footer-column {
-            flex: 1;
-            min-width: 200px;
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .footer-column h3 {
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-            font-size: 18px;
+        .footer-section p,
+        .footer-section ul {
+            margin-bottom: 1rem;
         }
 
-        .footer-column ul {
+        .footer-section ul {
             list-style: none;
         }
 
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-column ul li a {
-            color: #ccc;
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
             transition: color 0.3s;
         }
 
-        .footer-column ul li a:hover {
-            color: white;
+        .footer-section a:hover {
+            color: var(--secondary-color);
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 20px;
-        }
-
-        .copyright {
+        .footer-bottom {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            color: #aaa;
-            font-size: 14px;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* Mobile Styles */
         @media (max-width: 768px) {
-            .header-container {
-                padding: 15px;
-            }
-
-            .language-switcher {
-                position: static;
-                justify-content: flex-end;
-                margin-bottom: 10px;
-                width: 100%;
-            }
-
-            nav {
-                position: fixed;
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
                 top: 70px;
                 left: 0;
                 width: 100%;
-                background-color: white;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                padding: 20px;
-                transform: translateY(-150%);
-                transition: transform 0.3s ease;
+                background: #fff;
+                padding: 1rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             }
 
-            nav.active {
-                transform: translateY(0);
+            .nav-links.active {
+                display: flex;
             }
 
-            nav ul {
-                flex-direction: column;
-            }
-
-            nav ul li {
-                margin: 10px 0;
+            .nav-links li {
+                margin: 1rem 0;
             }
 
             .mobile-menu-btn {
                 display: block;
             }
 
-            .hero h1 {
-                font-size: 2rem;
+            .banner {
+                height: 300px;
             }
 
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
+            .banner-text {
+                font-size: 1.2rem;
             }
 
-            .about-content {
-                flex-direction: column;
-            }
-
+            .about-content,
             .contact-container {
                 flex-direction: column;
             }
 
-            .impact-stats {
-                flex-direction: column;
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .stat-item {
-                width: 100%;
+            .hero p {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <div class="container header-container">
-            <div class="logo">Bright<span>Future</span></div>
-            <div class="language-switcher">
-                <button class="language-btn active" data-lang="en">EN</button>
-                <button class="language-btn" data-lang="zh">中文</button>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
+        <div class="container">
             <nav>
-                <ul>
+                <div class="logo">Bright Future</div>
+                <ul class="nav-links">
                     <li><a href="#home" data-i18n="nav.home">Home</a></li>
                     <li><a href="#about" data-i18n="nav.about">About Us</a></li>
                     <li><a href="#programs" data-i18n="nav.programs">Programs</a></li>
                     <li><a href="#impact" data-i18n="nav.impact">Our Impact</a></li>
                     <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-                    <li><a href="#donate" class="btn btn-secondary" data-i18n="nav.donate">Donate</a></li>
+                    <li><a href="#donate" data-i18n="nav.donate">Donate</a></li>
                 </ul>
+                <div class="language-switcher">
+                    <button class="language-btn active" data-lang="en" aria-label="Switch to English" aria-current="true">EN</button>
+                    <button class="language-btn" data-lang="zh" aria-label="Switch to Chinese" aria-current="false">中文</button>
+                    <button class="language-btn" data-lang="fr" aria-label="Switch to French" aria-current="false">FR</button>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="banner-section" id="banners" role="region" aria-label="Promotional banners">
+        <div class="banner-container">
+            <!-- Banners will be inserted dynamically -->
+        </div>
+    </section>
+
+    <section class="hero" id="home" data-image-id="hero_background">
         <div class="container">
-            <h1 data-i18n="hero.title">Empowering Children Through Education</h1>
-            <p data-i18n="hero.subtitle">We provide quality educational programs and support for underprivileged children in Hong Kong, helping them build a brighter future.</p>
-            <div class="hero-buttons">
-                <a href="#programs" class="btn" data-i18n="hero.programs_btn">Our Programs</a>
-                <a href="#donate" class="btn btn-secondary" data-i18n="hero.donate_btn">Support Us</a>
+            <div class="hero-content">
+                <h1 data-i18n="hero.title">Empowering Children Through Education</h1>
+                <p data-i18n="hero.subtitle">We provide quality educational programs and support for underprivileged children in Hong Kong, helping them build a brighter future.</p>
+                <div class="hero-buttons">
+                    <a href="#programs" class="btn" data-i18n="hero.programs_btn">Our Programs</a>
+                    <a href="#donate" class="btn btn-secondary" data-i18n="hero.donate_btn">Support Us</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="section" id="about">
         <div class="container">
             <h2 class="section-title" data-i18n="about.title">About Our NGO</h2>
@@ -484,54 +501,28 @@
                     <p data-i18n="about.text3">With a team of dedicated volunteers and educators, we've helped over 5,000 children in Hong Kong improve their education outcomes and life prospects.</p>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Children learning in classroom" data-i18n="about.image_alt">
+                    <img data-image-id="about_image" src="" alt="" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Programs Section -->
     <section class="section bg-light" id="programs">
         <div class="container">
             <h2 class="section-title" data-i18n="programs.title">Our Programs</h2>
             <div class="programs-grid">
-                <div class="program-card">
-                    <div class="program-image" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="program-info">
-                        <h3 data-i18n="programs.program1.title">After-School Tutoring</h3>
-                        <p data-i18n="programs.program1.desc">Daily academic support in core subjects with qualified tutors to help children keep up with their studies.</p>
-                        <a href="#" class="btn" data-i18n="programs.learn_more">Learn More</a>
-                    </div>
-                </div>
-                <div class="program-card">
-                    <div class="program-image" style="background-image: url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="program-info">
-                        <h3 data-i18n="programs.program2.title">Language Classes</h3>
-                        <p data-i18n="programs.program2.desc">English and Mandarin language courses to improve communication skills and future opportunities.</p>
-                        <a href="#" class="btn" data-i18n="programs.learn_more">Learn More</a>
-                    </div>
-                </div>
-                <div class="program-card">
-                    <div class="program-image" style="background-image: url('https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="program-info">
-                        <h3 data-i18n="programs.program3.title">STEM Workshops</h3>
-                        <p data-i18n="programs.program3.desc">Interactive science, technology, engineering and math activities to spark curiosity and creativity.</p>
-                        <a href="#" class="btn" data-i18n="programs.learn_more">Learn More</a>
-                    </div>
-                </div>
+                <!-- Program cards will be inserted dynamically -->
             </div>
         </div>
     </section>
 
-    <!-- Impact Section -->
     <section class="section" id="impact">
         <div class="container">
             <h2 class="section-title" data-i18n="impact.title">Our Impact</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;" data-i18n="impact.subtitle">Since our founding, we've made a significant difference in the lives of thousands of children and their families across Hong Kong.</p>
-            
+            <p data-i18n="impact.subtitle">Since our founding, we've made a significant difference in the lives of thousands of children and their families across Hong Kong.</p>
             <div class="impact-stats">
                 <div class="stat-item">
-                    <div class="stat-number">5,000+</div>
+                    <div class="stat-number">5000+</div>
                     <div class="stat-label" data-i18n="impact.stat1">Children Helped</div>
                 </div>
                 <div class="stat-item">
@@ -550,95 +541,76 @@
         </div>
     </section>
 
-<!-- Contact Section -->
-<section class="section bg-light" id="contact">
-    <div class="container">
-        <h2 class="section-title" data-i18n="contact.title">Get In Touch</h2>
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3 data-i18n="contact.info_title">Contact Information</h3>
-                <p><strong data-i18n="contact.address">Address:</strong> 123 Education Road, Kowloon, Hong Kong</p>
-                <p><strong data-i18n="contact.phone">Phone:</strong> +852 1234 5678</p>
-                <p><strong>WhatsApp:</strong> <a href="https://wa.me/85296697245" class="whatsapp-link">+852 9669 7245</a></p>
-                <p><strong data-i18n="contact.email">Email:</strong> info@brightfuturehk.org</p>
-                <p><strong data-i18n="contact.hours">Office Hours:</strong> <span data-i18n="contact.hours_detail">Monday-Friday, 9:00 AM - 6:00 PM</span></p>
-                
-                <div class="whatsapp-btn-container" style="margin-top: 20px;">
-                    <a href="https://wa.me/85296697245" class="btn whatsapp-btn" style="background-color: #25D366; display: inline-flex; align-items: center;">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="margin-right: 8px; fill: white;">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-6.29 3.617c-.545 1.514-1.656 2.707-3.147 3.154-1.48.444-3.194.18-4.292-.606-.747-.526-1.312-1.275-1.629-2.119-.311-.842-.332-1.714-.058-2.486l.315-.82-1.177-2.85c-.236-.576-.357-1.186-.357-1.784 0-2.084 1.451-3.823 3.578-4.216.529-.098 1.089-.098 1.666.005 1.058.193 1.934.681 2.629 1.408.696.726 1.145 1.58 1.356 2.538.208.96.172 1.925-.108 2.8-.062.193-.143.38-.242.56l-1.18 2.756zM12 0C5.373 0 0 5.373 0 12c0 2.126.549 4.126 1.517 5.877L0 24l6.335-1.535A11.96 11.96 0 0 0 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12"/>
+    <section class="section bg-light" id="contact">
+        <div class="container">
+            <h2 class="section-title" data-i18n="contact.title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 data-i18n="contact.info_title">Contact Information</h3>
+                    <p><strong data-i18n="contact.address">Address:</strong> 123 Education Road, Kowloon, Hong Kong</p>
+                    <p><strong data-i18n="contact.phone">Phone:</strong> +852 1234 5678</p>
+                    <p><strong>WhatsApp:</strong> <a href="https://wa.me/85296697245" class="whatsapp-link">+852 9669 7245</a></p>
+                    <p><strong data-i18n="contact.email">Email:</strong> info@brightfuturehk.org</p>
+                    <p><strong data-i18n="contact.hours">Office Hours:</strong> <span data-i18n="contact.hours_detail">Monday-Friday, 9:00 AM - 6:00 PM</span></p>
+                    <a href="https://wa.me/85296697245" class="btn whatsapp-btn" aria-label="Chat on WhatsApp">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-label="WhatsApp icon">
+                            <title>WhatsApp</title>
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.074-.149-.669-.718-.916-.986-.246-.269-.347-.447-.445-.547-.099-.099-.198-.099-.297-.049-.099.049-.471.246-.644.445-.173.198-.693.842-1.39 2.01-.697 1.169-.996 2.427-.996 3.596 0 1.17.297 2.326 1.39 3.496.894 1.171 2.427 1.866 4.61 1.866 1.783 0 3.168-.445 4.014-1.335.845-.89 1.093-2.178.992-3.596-.099-1.319-.595-2.128-1.341-2.625zm-5.472 8.618c-2.178-5.472 0-2.178-5.472-5.472-5.472-2.178 0-4.014 1.335-4.91 3.496-.894 1.171-1.39 2.326-1.39 3.496 0 1.17.297 2.427.996 3.596.697 1.169 1.216 1.814 1.39 2.01.173.198.545.396.644.445.099.049.198.049.297-.049.099-.099.198-.297.445-.547.246-.269.841-.837.916-.986.074-.149.124-.322.025-.52-.099-.198-.149-.322-.298-.497-.149-.174-.312-.387-.446-.52-.149-.148-.304-.309-.13-.606.173-.297.77-1.271 1.653-2.059 1.135-1.012 2.093-1.325 2.39-1.475.297-.148.471-.123.644.075.173.198.743.867.94 1.164.198.297.396.249.67.15.273-.099 1.733-.818 2.03-.967.297-.149.793-.958 1.341-2.625.101-1.418-.147-2.706-.992-3.596-.846-.89-2.231-1.335-4.014-1.335-2.183 0-3.716.695-4.61 1.866-1.093 1.17-1.39 2.326-1.39 3.496 0 1.169.299 2.427.996 3.596.697 1.169 1.216 1.814 1.39 2.01.173.198.545.396.644.445.099.049.198.049.297-.049.099-.099.198-.297.445-.547.246-.269.841-.837.916-.986.074-.149.124-.322.025-.52-.099-.198-.149-.322-.298-.497-.149-.174-.312-.387-.446-.52-.149-.148-.304-.309-.13-.606.173-.297.77-1.271 1.653-2.059 1.135-1.012 2.093-1.325 2.39-1.475.297-.148.471-.123.644.075.173.198.743.867.94 1.164.198.297.396.249.67.15.273-.099 1.733-.818 2.03-.967.297-.149.793-.958 1.341-2.625zM12 22.5c-5.799 0-10.5-4.701-10.5-10.5S6.201 1.5 12 1.5 22.5 6.201 22.5 12 17.799 22.5 12 22.5zm0-19.5c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z"/>
                         </svg>
                         <span data-i18n="contact.whatsapp">Chat on WhatsApp</span>
                     </a>
                 </div>
+                <div class="contact-form">
+                    <h3 data-i18n="contact.form_title">Send Us a Message</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name" data-i18n="contact.name">Name</label>
+                            <input type="text" id="name" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-i18n="contact.email_label">Email</label>
+                            <input type="email" id="email" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-i18n="contact.message">Message</label>
+                            <textarea id="message" required aria-required="true"></textarea>
+                        </div>
+                        <button type="submit" class="btn" data-i18n="contact.send_btn">Send Message</button>
+                    </form>
+                </div>
             </div>
-            <div class="contact-form">
-                <h3 data-i18n="contact.form_title">Send Us a Message</h3>
-                <form>
-                    <div class="form-group">
-                        <label for="name" data-i18n="contact.name">Name</label>
-                        <input type="text" id="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" data-i18n="contact.email_label">Email</label>
-                        <input type="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" data-i18n="contact.message">Message</label>
-                        <textarea id="message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn" data-i18n="contact.send_btn">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-    <!-- Donate Section -->
-    <section class="section" id="donate" style="background-color: var(--primary-color); color: white; text-align: center;">
-        <div class="container">
-            <h2 class="section-title" style="color: white;" data-i18n="donate.title">Support Our Mission</h2>
-            <p style="max-width: 700px; margin: 0 auto 30px;" data-i18n="donate.text">Your donation helps us provide educational resources, meals, and a safe learning environment for children in need.</p>
-            <a href="#" class="btn btn-secondary" style="font-size: 18px; padding: 15px 30px;" data-i18n="donate.btn">Donate Now</a>
         </div>
     </section>
 
-    <!-- Footer -->
+    <section class="section donate-section" id="donate">
+        <div class="container">
+            <h2 class="section-title" data-i18n="donate.title">Support Our Mission</h2>
+            <p data-i18n="donate.text">Your donation helps us provide educational resources, meals, and a safe learning environment for children in need.</p>
+            <a href="#" class="btn" data-i18n="donate.btn">Donate Now</a>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
-            <div class="footer-container">
-                <div class="footer-column">
+            <div class="footer-content">
+                <div class="footer-section">
                     <h3 data-i18n="footer.bright_future">Bright Future</h3>
                     <p data-i18n="footer.mission">Empowering children through education in Hong Kong since 2010.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook">FB</a>
-                        <a href="#" aria-label="Instagram">IG</a>
-                        <a href="#" aria-label="YouTube">YT</a>
-                        <a href="#" aria-label="LinkedIn">LI</a>
-                    </div>
+                    <p>
+                        <a href="https://facebook.com/brightfuturehk" aria-label="Facebook">FB</a> |
+                        <a href="https://instagram.com/brightfuturehk" aria-label="Instagram">IG</a> |
+                        <a href="https://twitter.com/brightfuturehk" aria-label="Twitter">TW</a>
+                    </p>
                 </div>
-                <div class="footer-column">
+                <div class="footer-section">
                     <h3 data-i18n="footer.quick_links">Quick Links</h3>
                     <ul>
-                        <li><a href="#home" data-i18n="nav.home">Home</a></li>
-                        <li><a href="#about" data-i18n="nav.about">About Us</a></li>
-                        <li><a href="#programs" data-i18n="nav.programs">Programs</a></li>
-                        <li><a href="#impact" data-i18n="nav.impact">Our Impact</a></li>
-                        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 data-i18n="footer.programs">Programs</h3>
-                    <ul>
-                        <li><a href="#" data-i18n="programs.program1.title">After-School Tutoring</a></li>
-                        <li><a href="#" data-i18n="programs.program2.title">Language Classes</a></li>
-                        <li><a href="#" data-i18n="programs.program3.title">STEM Workshops</a></li>
+                        <li><a href="#programs" data-i18n="footer.programs">Programs</a></li>
                         <li><a href="#" data-i18n="footer.summer_camps">Summer Camps</a></li>
                         <li><a href="#" data-i18n="footer.parent_workshops">Parent Workshops</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-section">
                     <h3 data-i18n="footer.legal">Legal</h3>
                     <ul>
                         <li><a href="#" data-i18n="footer.privacy">Privacy Policy</a></li>
@@ -647,224 +619,303 @@
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p data-i18n="footer.copyright">&copy; 2023 Bright Future NGO. All Rights Reserved. Registered Charity in Hong Kong (IR No. 91/12345)</p>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">© 2023 Bright Future NGO. All Rights Reserved. Registered Charity in Hong Kong (IR No. 91/12345)</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Language translations
-        const translations = {
-            en: {
-"contact.whatsapp": "Chat on WhatsApp",
-                "nav.home": "Home",
-                "nav.about": "About Us",
-                "nav.programs": "Programs",
-                "nav.impact": "Our Impact",
-                "nav.contact": "Contact",
-                "nav.donate": "Donate",
-                "hero.title": "Empowering Children Through Education",
-                "hero.subtitle": "We provide quality educational programs and support for underprivileged children in Hong Kong, helping them build a brighter future.",
-                "hero.programs_btn": "Our Programs",
-                "hero.donate_btn": "Support Us",
-                "about.title": "About Our NGO",
-                "about.text1": "Founded in 2010, Bright Future is a Hong Kong-based NGO dedicated to providing educational opportunities for children from disadvantaged backgrounds.",
-                "about.text2": "We believe every child deserves access to quality education regardless of their family's financial situation. Our programs focus on academic support, skill development, and personal growth.",
-                "about.text3": "With a team of dedicated volunteers and educators, we've helped over 5,000 children in Hong Kong improve their education outcomes and life prospects.",
-                "about.image_alt": "Children learning in classroom",
-                "programs.title": "Our Programs",
-                "programs.program1.title": "After-School Tutoring",
-                "programs.program1.desc": "Daily academic support in core subjects with qualified tutors to help children keep up with their studies.",
-                "programs.program2.title": "Language Classes",
-                "programs.program2.desc": "English and Mandarin language courses to improve communication skills and future opportunities.",
-                "programs.program3.title": "STEM Workshops",
-                "programs.program3.desc": "Interactive science, technology, engineering and math activities to spark curiosity and creativity.",
-                "programs.learn_more": "Learn More",
-                "impact.title": "Our Impact",
-                "impact.subtitle": "Since our founding, we've made a significant difference in the lives of thousands of children and their families across Hong Kong.",
-                "impact.stat1": "Children Helped",
-                "impact.stat2": "Volunteers",
-                "impact.stat3": "Improved Grades",
-                "impact.stat4": "Community Centers",
-                "contact.title": "Get In Touch",
-                "contact.info_title": "Contact Information",
-                "contact.address": "Address:",
-                "contact.phone": "Phone:",
-                "contact.email": "Email:",
-                "contact.hours": "Office Hours:",
-                "contact.hours_detail": "Monday-Friday, 9:00 AM - 6:00 PM",
-                "contact.form_title": "Send Us a Message",
-                "contact.name": "Name",
-                "contact.email_label": "Email",
-                "contact.message": "Message",
-                "contact.send_btn": "Send Message",
-                "donate.title": "Support Our Mission",
-                "donate.text": "Your donation helps us provide educational resources, meals, and a safe learning environment for children in need.",
-                "donate.btn": "Donate Now",
-                "footer.bright_future": "Bright Future",
-                "footer.mission": "Empowering children through education in Hong Kong since 2010.",
-                "footer.quick_links": "Quick Links",
-                "footer.programs": "Programs",
-                "footer.summer_camps": "Summer Camps",
-                "footer.parent_workshops": "Parent Workshops",
-                "footer.legal": "Legal",
-                "footer.privacy": "Privacy Policy",
-                "footer.terms": "Terms of Service",
-                "footer.report": "Annual Report",
-                "footer.copyright": "© 2023 Bright Future NGO. All Rights Reserved. Registered Charity in Hong Kong (IR No. 91/12345)"
-            },
-            zh: {
-"contact.whatsapp": "WhatsApp聯絡我們",
-                "nav.home": "主頁",
-                "nav.about": "關於我們",
-                "nav.programs": "課程計劃",
-                "nav.impact": "我們的影響",
-                "nav.contact": "聯絡我們",
-                "nav.donate": "捐款",
-                "hero.title": "透過教育賦予兒童力量",
-                "hero.subtitle": "我們為香港弱勢兒童提供優質教育課程和支持，幫助他們建立更光明的未來。",
-                "hero.programs_btn": "我們的課程",
-                "hero.donate_btn": "支持我們",
-                "about.title": "關於我們的非政府組織",
-                "about.text1": "光明未來成立於2010年，是一家總部位於香港的非政府組織，致力為弱勢背景的兒童提供教育機會。",
-                "about.text2": "我們相信每個孩子都應該獲得優質教育，無論其家庭經濟狀況如何。我們的課程專注於學業支持、技能發展和個人成長。",
-                "about.text3": "憑藉一支由敬業的志願者和教育工作者組成的團隊，我們已幫助香港超過5,000名兒童改善了教育成果和生活前景。",
-                "about.image_alt": "孩子在教室學習",
-                "programs.title": "我們的課程",
-                "programs.program1.title": "課後輔導",
-                "programs.program1.desc": "由合格導師提供核心科目的日常學業支持，幫助孩子跟上學習進度。",
-                "programs.program2.title": "語言課程",
-                "programs.program2.desc": "英語和普通話課程，提升溝通技巧和未來機會。",
-                "programs.program3.title": "STEM工作坊",
-                "programs.program3.desc": "互動式科學、技術、工程和數學活動，激發好奇心和創造力。",
-                "programs.learn_more": "了解更多",
-                "impact.title": "我們的影響",
-                "impact.subtitle": "自成立以來，我們已為香港數千名兒童及其家庭的生活帶來重大改變。",
-                "impact.stat1": "受助兒童",
-                "impact.stat2": "志願者",
-                "impact.stat3": "成績提升",
-                "impact.stat4": "社區中心",
-                "contact.title": "聯絡我們",
-                "contact.info_title": "聯絡信息",
-                "contact.address": "地址：",
-                "contact.phone": "電話：",
-                "contact.email": "電郵：",
-                "contact.hours": "辦公時間：",
-                "contact.hours_detail": "星期一至五，上午9:00至下午6:00",
-                "contact.form_title": "發送訊息",
-                "contact.name": "姓名",
-                "contact.email_label": "電郵",
-                "contact.message": "訊息",
-                "contact.send_btn": "發送訊息",
-                "donate.title": "支持我們的使命",
-                "donate.text": "您的捐款幫助我們為有需要的兒童提供教育資源、膳食和安全的學習環境。",
-                "donate.btn": "立即捐款",
-                "footer.bright_future": "光明未來",
-                "footer.mission": "自2010年起透過教育賦予香港兒童力量。",
-                "footer.quick_links": "快速連結",
-                "footer.programs": "課程計劃",
-                "footer.summer_camps": "暑期營",
-                "footer.parent_workshops": "家長工作坊",
-                "footer.legal": "法律資訊",
-                "footer.privacy": "隱私政策",
-                "footer.terms": "服務條款",
-                "footer.report": "年度報告",
-                "footer.copyright": "© 2023 光明未來非政府組織。版權所有。香港註冊慈善機構 (檔案編號：91/12345)"
-            }
-        };
+        document.addEventListener('DOMContentLoaded', async () => {
+            let currentLang = localStorage.getItem('preferredLang') || 'en';
 
-        // Language switching functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const languageBtns = document.querySelectorAll('.language-btn');
-            let currentLang = 'en'; // Default language
-            
-            // Check for saved language preference
-            const savedLang = localStorage.getItem('preferredLang');
-            if (savedLang) {
-                currentLang = savedLang;
-                document.querySelector(`.language-btn[data-lang="${savedLang}"]`).classList.add('active');
-                document.querySelector(`.language-btn:not([data-lang="${savedLang}"])`).classList.remove('active');
-                updatePageLanguage(savedLang);
-            }
-            
-            // Add click event to language buttons
-            languageBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    currentLang = lang;
-                    
-                    // Update active button
-                    languageBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Save preference to localStorage
-                    localStorage.setItem('preferredLang', lang);
-                    
-                    // Update page content
-                    updatePageLanguage(lang);
-                });
-            });
-            
-            // Function to update page content based on selected language
-            function updatePageLanguage(lang) {
-                const elements = document.querySelectorAll('[data-i18n]');
-                
-                elements.forEach(element => {
-                    const key = element.getAttribute('data-i18n');
-                    if (translations[lang] && translations[lang][key]) {
-                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                            element.setAttribute('placeholder', translations[lang][key]);
+            // CSV URLs (update gid values for Images, Programs, and Banners)
+            const csvUrls = {
+                translations: 'https://docs.google.com/spreadsheets/d/1KpBoxcMUExIKt-axU1wmfNlWwTIRLsn4MIBhaN1IYEc/export?format=csv&gid=0',
+                images: 'https://docs.google.com/spreadsheets/d/1KpBoxcMUExIKt-axU1wmfNlWwTIRLsn4MIBhaN1IYEc/export?format=csv&gid=2068252491',
+                programs: 'https://docs.google.com/spreadsheets/d/1KpBoxcMUExIKt-axU1wmfNlWwTIRLsn4MIBhaN1IYEc/export?format=csv&gid=1770837503',
+                banners: 'https://docs.google.com/spreadsheets/d/1KpBoxcMUExIKt-axU1wmfNlWwTIRLsn4MIBhaN1IYEc/export?format=csv&gid=602990287'
+            };
+
+            // Parse CSV data
+            function parseCSV(csvText) {
+                const rows = csvText.split('\n').map(row => {
+                    // Handle commas within quoted fields
+                    const cells = [];
+                    let currentCell = '';
+                    let inQuotes = false;
+                    for (let i = 0; i < row.length; i++) {
+                        if (row[i] === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (row[i] === ',' && !inQuotes) {
+                            cells.push(currentCell.trim());
+                            currentCell = '';
                         } else {
-                            element.textContent = translations[lang][key];
+                            currentCell += row[i];
+                        }
+                    }
+                    cells.push(currentCell.trim());
+                    return cells;
+                });
+                const headers = rows[0];
+                return rows.slice(1).map(row => {
+                    const obj = {};
+                    headers.forEach((header, i) => {
+                        obj[header] = row[i] || '';
+                    });
+                    return obj;
+                }).filter(row => row.Banner_ID || row.Program_ID || row.ID || row.Key);
+            }
+
+            // Fetch CSV data
+            async function fetchCSV(url) {
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error(`Failed to fetch CSV: ${url}`);
+                    const text = await response.text();
+                    return parseCSV(text);
+                } catch (error) {
+                    console.error(`Error fetching CSV: ${url}`, error);
+                    return [];
+                }
+            }
+
+            // Fetch all data
+            const [translationsData, imagesData, programsData, bannersData] = await Promise.all([
+                fetchCSV(csvUrls.translations),
+                fetchCSV(csvUrls.images),
+                fetchCSV(csvUrls.programs),
+                fetchCSV(csvUrls.banners)
+            ]);
+
+            // Log banners data for debugging
+            console.log('Fetched banners data:', bannersData);
+
+            // Process translations
+            const translations = {};
+            translationsData.forEach(row => {
+                translations[row.Key] = {
+                    en: row.EN,
+                    zh: row.ZH,
+                    fr: row.FR || row.EN
+                };
+            });
+
+            // Process images
+            const images = {};
+            imagesData.forEach(row => {
+                images[row.ID] = {
+                    url: row.Image_URL,
+                    alt: {
+                        en: row.Alt_Text_EN,
+                        zh: row.Alt_Text_ZH,
+                        fr: row.Alt_Text_FR || row.Alt_Text_EN
+                    }
+                };
+            });
+
+            // Process programs
+            const programs = programsData.map(row => ({
+                id: row.Program_ID,
+                title: {
+                    en: row.Title_EN,
+                    zh: row.Title_ZH,
+                    fr: row.Title_FR || row.Title_EN
+                },
+                description: {
+                    en: row.Description_EN,
+                    zh: row.Description_ZH,
+                    fr: row.Description_FR || row.Description_EN
+                },
+                image_url: row.Image_URL,
+                alt: {
+                    en: row.Alt_Text_EN,
+                    zh: row.Alt_Text_ZH,
+                    fr: row.Alt_Text_FR || row.Alt_Text_EN
+                }
+            }));
+
+            // Process banners
+            const banners = bannersData.map(row => ({
+                id: row.Banner_ID,
+                text: {
+                    en: row.Text_EN,
+                    zh: row.Text_ZH,
+                    fr: row.Text_FR || row.Text_EN
+                },
+                image_url: row.Image_URL,
+                alt: {
+                    en: row.Alt_Text_EN,
+                    zh: row.Alt_Text_ZH,
+                    fr: row.Alt_Text_FR || row.Alt_Text_EN
+                }
+            }));
+
+            // Log processed banners for debugging
+            console.log('Processed banners:', banners);
+
+            // Update page language
+            function updatePageLanguage(lang) {
+                // Update text
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    if (translations[key] && translations[key][lang]) {
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.setAttribute('placeholder', translations[key][lang]);
+                        } else {
+                            element.textContent = translations[key][lang];
                         }
                     }
                 });
+
+                // Update images
+                document.querySelectorAll('img[data-image-id]').forEach(img => {
+                    const id = img.getAttribute('data-image-id');
+                    if (images[id]) {
+                        img.src = images[id].url;
+                        img.alt = images[id].alt[lang];
+                    }
+                });
+
+                // Update background images (e.g., hero)
+                document.querySelectorAll('[data-image-id]:not(img)').forEach(element => {
+                    const id = element.getAttribute('data-image-id');
+                    if (images[id]) {
+                        element.style.backgroundImage = `url('${images[id].url}')`;
+                        element.setAttribute('aria-label', images[id].alt[lang]);
+                    }
+                });
+
+                // Update programs
+                const programsGrid = document.querySelector('.programs-grid');
+                programsGrid.innerHTML = '';
+                programs.forEach(program => {
+                    const card = document.createElement('div');
+                    card.className = 'program-card';
+                    card.innerHTML = `
+                        <div class="program-image">
+                            <img src="${program.image_url}" alt="${program.alt[lang]}" loading="lazy">
+                        </div>
+                        <div class="program-info">
+                            <h3>${program.title[lang]}</h3>
+                            <p>${program.description[lang]}</p>
+                            <a href="#" class="btn">${translations['programs.learn_more'][lang]}</a>
+                        </div>
+                    `;
+                    programsGrid.appendChild(card);
+                });
+
+                // Update banners with infinite loop
+                const bannerContainer = document.querySelector('.banner-container');
+                bannerContainer.innerHTML = '';
+                // Create sequence: [last, ...original, first] for seamless loop
+                const extendedBanners = [
+                    banners[banners.length - 1], // Clone last banner (banner3)
+                    ...banners,                  // Original banners (banner1, banner2, banner3)
+                    banners[0]                   // Clone first banner (banner1)
+                ];
+                console.log('Extended banners:', extendedBanners);
+                extendedBanners.forEach((banner, index) => {
+                    const bannerElement = document.createElement('div');
+                    bannerElement.className = 'banner';
+                    bannerElement.setAttribute('data-banner-index', index);
+                    bannerElement.setAttribute('data-banner-id', banner.id);
+                    bannerElement.innerHTML = `
+                        <img src="${banner.image_url}" alt="${banner.alt[lang]}" loading="lazy">
+                        <div class="banner-text">${banner.text[lang]}</div>
+                    `;
+                    bannerContainer.appendChild(bannerElement);
+                });
+
+                // Log rendered banners
+                console.log('Rendered banners:', bannerContainer.children.length, 'elements');
+
+                // Initialize scroll position to first real banner (skip cloned last banner)
+                const bannerWidth = bannerContainer.offsetWidth;
+                bannerContainer.scrollLeft = bannerWidth; // Start at banner1
+
+                // Handle infinite scroll with debouncing
+                let isScrolling = false;
+                bannerContainer.addEventListener('scroll', () => {
+                    if (isScrolling) return;
+                    isScrolling = true;
+                    setTimeout(() => {
+                        const scrollPos = bannerContainer.scrollLeft;
+                        const totalWidth = bannerWidth * extendedBanners.length;
+                        console.log('Scroll position:', scrollPos, 'Total width:', totalWidth);
+                        // If scrolled to cloned first banner at end, jump to real first banner
+                        if (scrollPos >= totalWidth - bannerWidth - 10) {
+                            console.log('Jump to real first banner');
+                            bannerContainer.scrollLeft = bannerWidth;
+                        }
+                        // If scrolled to cloned last banner at start, jump to real last banner
+                        if (scrollPos <= 10) {
+                            console.log('Jump to real last banner');
+                            bannerContainer.scrollLeft = bannerWidth * banners.length;
+                        }
+                        isScrolling = false;
+                    }, 100);
+                });
             }
-            
-            // Mobile Menu Toggle
+
+            // Initialize page
+            updatePageLanguage(currentLang);
+
+            // Language switcher
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.getAttribute('data-lang');
+                    localStorage.setItem('preferredLang', lang);
+                    document.querySelectorAll('.language-btn').forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-current', 'false');
+                    });
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-current', 'true');
+                    updatePageLanguage(lang);
+                });
+            });
+
+            // Mobile menu
             const menuBtn = document.querySelector('.mobile-menu-btn');
-            const nav = document.querySelector('nav');
-            
+            const nav = document.querySelector('.nav-links');
             menuBtn.addEventListener('click', () => {
                 nav.classList.toggle('active');
+                const isExpanded = nav.classList.contains('active');
+                menuBtn.setAttribute('aria-expanded', isExpanded);
             });
-            
-            // Smooth scrolling for anchor links
+
+            // Smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
                     nav.classList.remove('active');
-                    
+                    menuBtn.setAttribute('aria-expanded', 'false');
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-                    
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
                         window.scrollTo({
-                            top: targetElement.offsetTop - 80,
+                            top: targetElement.offsetTop - headerHeight,
                             behavior: 'smooth'
                         });
                     }
                 });
             });
-            
-            // Sticky header on scroll
+
+            // Sticky header
             window.addEventListener('scroll', () => {
                 const header = document.querySelector('header');
                 header.classList.toggle('sticky', window.scrollY > 0);
             });
-            
-            // Simple form submission
-            const contactForm = document.querySelector('.contact-form form');
-            if (contactForm) {
-                contactForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    alert(currentLang === 'en' ? 'Thank you for your message! We will get back to you soon.' : '感謝您的訊息！我們會盡快回覆您。');
-                    contactForm.reset();
-                });
-            }
+
+            // Form submission
+            document.getElementById('contact-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert(translations['contact.send_btn'][currentLang] + ' submitted!');
+                e.target.reset();
+            });
         });
     </script>
 </body>
