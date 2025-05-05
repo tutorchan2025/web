@@ -10,6 +10,8 @@
     <meta property="og:image" content="/images/hero.jpg">
     <meta property="og:url" content="https://brightfuturehk.org">
     <title>Bright Future NGO</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -108,31 +110,25 @@
             cursor: pointer;
         }
 
-        /* Banner Section Styles */
+        /* Banner Section Styles (Swiper) */
         .banner-section {
             width: 100%;
-            overflow: hidden;
-            padding: 0;
             margin-top: 70px; /* Offset for fixed header */
+            padding: 0;
         }
 
-        .banner-container {
-            display: flex;
-            overflow-x: hidden; /* Hide scrollbar for seamless loop */
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-        }
-
-        .banner {
-            flex: 0 0 100%;
+        .swiper {
+            width: 100%;
             height: 400px;
-            position: relative;
-            scroll-snap-align: start;
-            display: block; /* Ensure banners are visible */
         }
 
-        .banner img {
+        .swiper-slide {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -149,6 +145,21 @@
             border-radius: 5px;
             font-size: 1.5rem;
             text-align: center;
+        }
+
+        /* Swiper Pagination */
+        .swiper-pagination {
+            bottom: 10px;
+        }
+
+        .swiper-pagination-bullet {
+            background: #fff;
+            opacity: 0.7;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--secondary-color);
+            opacity: 1;
         }
 
         .hero {
@@ -426,7 +437,7 @@
                 display: block;
             }
 
-            .banner {
+            .swiper {
                 height: 300px;
             }
 
@@ -473,8 +484,11 @@
     </header>
 
     <section class="banner-section" id="banners" role="region" aria-label="Promotional banners">
-        <div class="banner-container">
-            <!-- Banners will be inserted dynamically -->
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <!-- Slides will be inserted dynamically -->
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
     </section>
 
@@ -625,6 +639,8 @@
         </div>
     </footer>
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             let currentLang = localStorage.getItem('preferredLang') || 'en';
@@ -663,6 +679,8 @@
                     headers.forEach((header, i) => {
                         obj[header] = row[i] || '';
                     });
+                   
+
                     return obj;
                 }).filter(row => row.Banner_ID || row.Program_ID || row.ID || row.Key);
             }
@@ -805,56 +823,54 @@
                     programsGrid.appendChild(card);
                 });
 
-                // Update banners with infinite loop
-                const bannerContainer = document.querySelector('.banner-container');
-                bannerContainer.innerHTML = '';
-                // Create sequence: [last, ...original, first] for seamless loop
-                const extendedBanners = [
-                    banners[banners.length - 1], // Clone last banner (banner3)
-                    ...banners,                  // Original banners (banner1, banner2, banner3)
-                    banners[0]                   // Clone first banner (banner1)
-                ];
-                console.log('Extended banners:', extendedBanners);
-                extendedBanners.forEach((banner, index) => {
-                    const bannerElement = document.createElement('div');
-                    bannerElement.className = 'banner';
-                    bannerElement.setAttribute('data-banner-index', index);
-                    bannerElement.setAttribute('data-banner-id', banner.id);
-                    bannerElement.innerHTML = `
-                        <img src="${banner.image_url}" alt="${banner.alt[lang]}" loading="lazy">
-                        <div class="banner-text">${banner.text[lang]}</div>
-                    `;
-                    bannerContainer.appendChild(bannerElement);
-                });
+                // Update banners with Swiper
+                const swiperWrapper = document.querySelector('.swiper-wrapper');
+                swiperWrapper.innerHTML = '';
+                if (banners.length === 0) {
+                    swiperWrapper.innerHTML = '<div class="banner-text">Error loading banners. Please try again later.</div>';
+                } else {
+                    banners.forEach((banner, index) => {
+                        const slide = document.createElement('div');
+                        slide.className = 'swiper-slide';
+                        slide.setAttribute('data-banner-id', banner.id);
+                        slide.setAttribute('data-swiper-slide-index', index);
+                        slide.setAttribute('role', 'group');
+                        slide.setAttribute('aria-label', `Banner ${index + 1}: ${banner.alt[lang]}`);
+                        slide.innerHTML = `
+                            <img src="${banner.image_url}" alt="${banner.alt[lang]}" loading="lazy">
+                            <div class="banner-text">${banner.text[lang]}</div>
+                        `;
+                        swiperWrapper.appendChild(slide);
+                    });
+                }
 
                 // Log rendered banners
-                console.log('Rendered banners:', bannerContainer.children.length, 'elements');
+                console.log('Rendered banners:', swiperWrapper.children.length, 'slides');
 
-                // Initialize scroll position to first real banner (skip cloned last banner)
-                const bannerWidth = bannerContainer.offsetWidth;
-                bannerContainer.scrollLeft = bannerWidth; // Start at banner1
+                // Destroy existing Swiper instance if it exists
+                if (window.swiperInstance) {
+                    window.swiperInstance.destroy(true, true);
+                }
 
-                // Handle infinite scroll with debouncing
-                let isScrolling = false;
-                bannerContainer.addEventListener('scroll', () => {
-                    if (isScrolling) return;
-                    isScrolling = true;
-                    setTimeout(() => {
-                        const scrollPos = bannerContainer.scrollLeft;
-                        const totalWidth = bannerWidth * extendedBanners.length;
-                        console.log('Scroll position:', scrollPos, 'Total width:', totalWidth);
-                        // If scrolled to cloned first banner at end, jump to real first banner
-                        if (scrollPos >= totalWidth - bannerWidth - 10) {
-                            console.log('Jump to real first banner');
-                            bannerContainer.scrollLeft = bannerWidth;
-                        }
-                        // If scrolled to cloned last banner at start, jump to real last banner
-                        if (scrollPos <= 10) {
-                            console.log('Jump to real last banner');
-                            bannerContainer.scrollLeft = bannerWidth * banners.length;
-                        }
-                        isScrolling = false;
-                    }, 100);
+                // Initialize Swiper
+                window.swiperInstance = new Swiper('.swiper', {
+                    loop: true,
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true
+                    },
+                    a11y: {
+                        enabled: true,
+                        prevSlideMessage: 'Previous banner',
+                        nextSlideMessage: 'Next banner',
+                        paginationBulletMessage: 'Go to banner {{index}}'
+                    }
                 });
             }
 
