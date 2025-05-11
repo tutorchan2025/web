@@ -1,1 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Program details for Bright Future NGO's educational initiatives in Hong Kong.">
+    <meta name="keywords" content="NGO, education, children, Hong Kong, charity, program">
+    <meta property="og:title" content="Bright Future NGO | Program Details">
+    <meta property="og:description" content="Learn more about our educational programs for underprivileged children in Hong Kong.">
+    <meta property="og:image" content="/images/hero.jpg">
+    <meta property="og:url" content="https://brightfuturehk.org/program.html">
+    <title>Bright Future NGO | Program Details</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --light-color: #f4f4f4;
+            --text-color: #333;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #fff;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        header.sticky {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid var(--primary-color);
+            padding: 0.3rem 0.6rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .language-btn.active {
+            background: var(--secondary-color);
+            color: #fff;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .section {
+            padding: 5rem 0;
+            margin-top: 70px; /* Offset for fixed header */
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .program-detail {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .program-image {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .program-image img {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            image-rendering: high-quality;
+        }
+
+        .program-content {
+            flex: 1;
+        }
+
+        .program-content h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .program-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: darken(var(--secondary-color), 10%);
+        }
+
+        .error-message {
+            text-align: center;
+            color: #d32f2f;
+            font-size: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                padding: 1rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .program-detail {
+                flex-direction: column;
+            }
+
+            .program-image {
+                max-width: 100%;
+            }
+
+            .program-content h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Bright Future</div>
+                <ul class="nav-links">
+                    <li><a href="index.html#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="index.html#about" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="index.html#programs" data-i18n="nav.programs">Programs</a></li>
+                    <li><a href="index.html#impact" data-i18n="nav.impact">Our Impact</a></li>
+                    <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+                    <li><a href="index.html#donate" data-i18n="nav.donate">Donate</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="language-btn active" data-lang="en" aria-label="Switch to English" aria-current="true">EN</button>
+                    <button class="language-btn" data-lang="zh" aria-label="Switch to Chinese" aria-current="false">中文</button>
+                    <button class="language-btn" data-lang="fr" aria-label="Switch to French" aria-current="false">FR</button>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section" id="program-detail" role="region" aria-label="Program details">
+        <div class="container">
+            <h2 class="section-title" data-i18n="program_detail.title">Program Details</h2>
+            <div class="program-detail">
+                <!-- Program content will be inserted dynamically -->
+            </div>
+            <div class="back-button">
+                <a href="index.html#programs" class="btn" data-i18n="program_detail.back">Back to Programs</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="footer.bright_future">Bright Future</h3>
+                    <p data-i18n="footer.mission">Empowering children through education in Hong Kong since 2010.</p>
+                    <p>
+                        <a href="https://facebook.com/brightfuturehk" aria-label="Facebook">FB</a> |
+                        <a href="https://instagram.com/brightfuturehk" aria-label="Instagram">IG</a> |
+                        <a href="https://twitter.com/brightfuturehk" aria-label="Twitter">TW</a>
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.quick_links">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html#programs" data-i18n="footer.programs">Programs</a></li>
+                        <li><a href="#" data-i18n="footer.summer_camps">Summer Camps</a></li>
+                        <li><a href="#" data-i18n="footer.parent_workshops">Parent Workshops</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.legal">Legal</h3>
+                    <ul>
+                        <li><a href="#" data-i18n="footer.privacy">Privacy Policy</a></li>
+                        <li><a href="#" data-i18n="footer.terms">Terms of Service</a></li>
+                        <li><a href="#" data-i18n="footer.report">Annual Report</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">© 2023 Bright Future NGO. All Rights Reserved. Registered Charity in Hong Kong (IR No. 91/12345)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            let currentLang = localStorage.getItem('preferredLang') || 'en';
+
+            // CSV URLs
+            const csvUrls = {
+                translations: 'https://docs.google.com/spreadsheets/d/1KpBoxcMUExIKt-axU1wmfNlWwTIRLsn4MIBhaN1IYEc/export?format=csv&gid=0',
+                programs: 'https://docs.google.com/spreadsheets/d/1KpBoxcMUExIKt-axU1wmfNlWwTIRLsn4MIBhaN1IYEc/export?format=csv&gid=1770837503'
+            };
+
+            // Parse CSV data
+            function parseCSV(csvText) {
+                const rows = csvText.split('\n').map(row => {
+                    const cells = [];
+                    let currentCell = '';
+                    let inQuotes = false;
+                    for (let i = 0; i < row.length; i++) {
+                        if (row[i] === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (row[i] === ',' && !inQuotes) {
+                            cells.push(currentCell.trim());
+                            currentCell = '';
+                        } else {
+                            currentCell += row[i];
+                        }
+                    }
+                    cells.push(currentCell.trim());
+                    return cells;
+                });
+                const headers = rows[0];
+                return rows.slice(1).map(row => {
+                    const obj = {};
+                    headers.forEach((header, i) => {
+                        obj[header] = row[i] || '';
+                    });
+                    return obj;
+                }).filter(row => row.Program_ID || row.Key);
+            }
+
+            // Fetch CSV data
+            async function fetchCSV(url) {
+                try {
+                    const response = await fetch(url, { cache: 'no-cache' });
+                    if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
+                    const text = await response.text();
+                    return parseCSV(text);
+                } catch (error) {
+                    console.error(`Error fetching CSV: ${url}`, error);
+                    return [];
+                }
+            }
+
+            // Fetch data
+            const [translationsData, programsData] = await Promise.all([
+                fetchCSV(csvUrls.translations),
+                fetchCSV(csvUrls.programs)
+            ]);
+
+            // Process translations
+            const translations = {};
+            translationsData.forEach(row => {
+                translations[row.Key] = {
+                    en: row.EN,
+                    zh: row.ZH,
+                    fr: row.FR || row.EN
+                };
+            });
+
+            // Process programs
+            const programs = programsData.map(row => ({
+                id: row.Program_ID,
+                title: {
+                    en: row.Title_EN,
+                    zh: row.Title_ZH,
+                    fr: row.Title_FR || row.Title_EN
+                },
+                description: {
+                    en: row.Description_EN,
+                    zh: row.Description_ZH,
+                    fr: row.Description_FR || row.Description_EN
+                },
+                image_url: row.Image_URL,
+                alt: {
+                    en: row.Alt_Text_EN,
+                    zh: row.Alt_Text_ZH,
+                    fr: row.Alt_Text_FR || row.Alt_Text_EN
+                }
+            }));
+
+            // Log programs data for debugging
+            console.log('Fetched programs data:', programs);
+
+            // Get Program_ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const programId = urlParams.get('id');
+            const program = programs.find(p => p.id === programId);
+
+            // Update page language
+            function updatePageLanguage(lang) {
+                // Update text
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    if (translations[key] && translations[key][lang]) {
+                        element.textContent = translations[key][lang];
+                    }
+                });
+
+                // Update program details
+                const programDetail = document.querySelector('.program-detail');
+                programDetail.innerHTML = '';
+                if (!program) {
+                    programDetail.innerHTML = `<p class="error-message" data-i18n="program_detail.error">Program not found. Please select a valid program.</p>`;
+                    console.warn('Program not found:', programId);
+                } else {
+                    programDetail.innerHTML = `
+                        <div class="program-image">
+                            <img src="${program.image_url}" alt="${program.alt[lang]}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=Program+Image+Failed'; console.error('Failed to load program image: ${program.image_url}');">
+                        </div>
+                        <div class="program-content">
+                            <h1>${program.title[lang]}</h1>
+                            <p>${program.description[lang]}</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // Initialize page
+            updatePageLanguage(currentLang);
+
+            // Language switcher
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.getAttribute('data-lang');
+                    localStorage.setItem('preferredLang', lang);
+                    document.querySelectorAll('.language-btn').forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-current', 'false');
+                    });
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-current', 'true');
+                    updatePageLanguage(lang);
+                });
+            });
+
+            // Mobile menu
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('.nav-links');
+            menuBtn.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                const isExpanded = nav.classList.contains('active');
+                menuBtn.setAttribute('aria-expanded', isExpanded);
+            });
+
+            // Smooth scrolling (for anchor links)
+            document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    nav.classList.remove('active');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('index.html')) {
+                        window.location.href = href;
+                    }
+                });
+            });
+
+            // Sticky header
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                header.classList.toggle('sticky', window.scrollY > 0);
+            });
+        });
+    </script>
+</body>
+</html>
