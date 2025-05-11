@@ -132,6 +132,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            image-rendering: high-quality; /* Ensure sharp scaling */
         }
 
         .banner-text {
@@ -646,7 +647,7 @@
         document.addEventListener('DOMContentLoaded', async () => {
             let currentLang = localStorage.getItem('preferredLang') || 'en';
 
-            // CSV URLs (update gid values for Images, Programs, and Banners)
+            // CSV URLs
             const csvUrls = {
                 translations: 'https://docs.google.com/spreadsheets/d/1KpBoxcMUExIKt-axU1wmfNlWwTIRLsn4MIBhaN1IYEc/export?format=csv&gid=0',
                 images: 'https://docs.google.com/spreadsheets/d/1KpBoxcMUExIKt-axU1wmfNlWwTIRLsn4MIBhaN1IYEc/export?format=csv&gid=2068252491',
@@ -657,7 +658,6 @@
             // Parse CSV data
             function parseCSV(csvText) {
                 const rows = csvText.split('\n').map(row => {
-                    // Handle commas within quoted fields
                     const cells = [];
                     let currentCell = '';
                     let inQuotes = false;
@@ -680,17 +680,15 @@
                     headers.forEach((header, i) => {
                         obj[header] = row[i] || '';
                     });
-                   
-
                     return obj;
                 }).filter(row => row.Banner_ID || row.Program_ID || row.ID || row.Key);
             }
 
-            // Fetch CSV data
+            // Fetch CSV data with error handling
             async function fetchCSV(url) {
                 try {
-                    const response = await fetch(url);
-                    if (!response.ok) throw new Error(`Failed to fetch CSV: ${url}`);
+                    const response = await fetch(url, { cache: 'no-cache' });
+                    if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
                     const text = await response.text();
                     return parseCSV(text);
                 } catch (error) {
@@ -770,7 +768,7 @@
                 }
             }));
 
-            // Log processed banners for debugging
+            // Log processed banners
             console.log('Processed banners:', banners);
 
             // Update page language
@@ -796,7 +794,7 @@
                     }
                 });
 
-                // Update background images (e.g., hero)
+                // Update background images
                 document.querySelectorAll('[data-image-id]:not(img)').forEach(element => {
                     const id = element.getAttribute('data-image-id');
                     if (images[id]) {
@@ -813,12 +811,12 @@
                     card.className = 'program-card';
                     card.innerHTML = `
                         <div class="program-image">
-                            <img src="${program.image_url}" alt="${program.alt[lang]}" loading="lazy">
+                            <img src="${program.image_url}" alt="${program.alt[lang]}" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x400?text=Program+Image+Failed'">
                         </div>
                         <div class="program-info">
                             <h3>${program.title[lang]}</h3>
                             <p>${program.description[lang]}</p>
-                            <a href="#" class="btn">${translations['programs.learn_more'][lang]}</a>
+                            <a href="program.html?id=${program.id}" class="btn">${translations['programs.learn_more'][lang]}</a>
                         </div>
                     `;
                     programsGrid.appendChild(card);
@@ -828,6 +826,7 @@
                 const swiperWrapper = document.querySelector('.swiper-wrapper');
                 swiperWrapper.innerHTML = '';
                 if (banners.length === 0) {
+                    console.warn('No banners found in data');
                     swiperWrapper.innerHTML = '<div class="banner-text">Error loading banners. Please try again later.</div>';
                 } else {
                     banners.forEach((banner, index) => {
@@ -838,7 +837,7 @@
                         slide.setAttribute('role', 'group');
                         slide.setAttribute('aria-label', `Banner ${index + 1}: ${banner.alt[lang]}`);
                         slide.innerHTML = `
-                            <img src="${banner.image_url}" alt="${banner.alt[lang]}" loading="lazy">
+                            <img src="${banner.image_url}" alt="${banner.alt[lang]}" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x400?text=Banner+${banner.id}+Failed'; console.error('Failed to load banner image: ${banner.image_url}');">
                             <div class="banner-text">${banner.text[lang]}</div>
                         `;
                         swiperWrapper.appendChild(slide);
@@ -846,7 +845,10 @@
                 }
 
                 // Log rendered banners
-                console.log('Rendered banners:', swiperWrapper.children.length, 'slides');
+                console.log('Rendered banners:', swiperWrapper.children.length, 'slides', Array.from(swiperWrapper.children).map(slide => ({
+                    id: slide.getAttribute('data-banner-id'),
+                    image: slide.querySelector('img').src
+                })));
 
                 // Destroy existing Swiper instance if it exists
                 if (window.swiperInstance) {
