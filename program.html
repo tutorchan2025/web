@@ -406,6 +406,11 @@
                     zh: row.Description_ZH,
                     fr: row.Description_FR || row.Description_EN
                 },
+                detail_description: {
+                    en: row.Detail_Description_EN,
+                    zh: row.Detail_Description_ZH,
+                    fr: row.Detail_Description_FR || row.Detail_Description_EN
+                },
                 image_url: row.Image_URL,
                 alt: {
                     en: row.Alt_Text_EN,
@@ -446,6 +451,7 @@
                         <div class="program-content">
                             <h1>${program.title[lang]}</h1>
                             <p>${program.description[lang]}</p>
+                            <p>${program.detail_description[lang]}</p>
                         </div>
                     `;
                 }
